@@ -1,0 +1,14 @@
+import { Summary } from "@components/Summary";
+import { TransactionsTable } from "@components/TransactionsTable";
+import { Container } from "./styles";
+
+function Dashboard() {
+  return (
+    <Container>
+      <Summary />
+      <TransactionsTable />
+    </Container>
+  );
+}
+
+export { Dashboard };
