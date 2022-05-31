@@ -1,6 +1,7 @@
 import { Dashboard } from "@components/Dashboard";
 import { Header } from "@components/Header";
 import { NewTransactionModal } from "@components/NewTransactionModal";
+import { TransactionsProvider } from "hooks/useTransactions";
 import { createServer, Model } from "miragejs";
 import { useState } from "react";
 import { GlobalStyle } from "./styles/global";
@@ -46,7 +47,7 @@ function App() {
   }
 
   return (
-    <>
+    <TransactionsProvider>
       <GlobalStyle />
       <Header onToggleNewTransactionModal={handleToggleNewTransactionModal} />
       <Dashboard />
@@ -54,7 +55,7 @@ function App() {
         isOpen={isNewTransactionModalOpen}
         onRequestClose={handleToggleNewTransactionModal}
       />
-    </>
+    </TransactionsProvider>
   );
 }
 

@@ -23,6 +23,8 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["warn"],
     "react/react-in-jsx-scope": "off",
     "import-helpers/order-imports": [
       "error",
