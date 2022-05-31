@@ -33,6 +33,10 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialised;
   }
 
+  html,body {
+    height: 100%;
+  }
+
   body, input, textarea, button {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
@@ -46,7 +50,8 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     border: 0;
     border-radius: 0.25rem;
-    transition: filter 0.2s;
+    transition: all 0.2s;
+    background: transparent;
 
     &:disabled {
       background: var(--light-gray);
@@ -63,5 +68,27 @@ export const GlobalStyle = createGlobalStyle`
     background: var(--light-gray);
     color: var(--dark-gray);
     cursor: not-allowed;
+  }
+
+  .react-modal-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .react-modal-content {
+    background: var(--white);
+    width: 100%;
+    max-width: 576px;
+    margin: 2rem;
+    padding: 3rem;
+    border-radius: 0.25rem;
+    position: relative;
   }
 `;

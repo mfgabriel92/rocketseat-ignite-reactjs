@@ -30,7 +30,6 @@
         "newlinesBetween": "never",
         "groups": [
           "module",
-          "/^@shared/",
           [
             "parent",
             "sibling",

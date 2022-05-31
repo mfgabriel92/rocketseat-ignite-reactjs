@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { useState, useEffect } from "react";
 import { api } from "services/api";
 import { Container, TableHeader, TableRow } from "./styles";
@@ -15,7 +16,9 @@ function TransactionsTable() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   useEffect(() => {
-    api.get("transactions").then((response) => setTransactions(response.data));
+    api
+      .get("transactions")
+      .then((response) => setTransactions(response.data.transactions));
   }, []);
 
   return (
@@ -26,12 +29,12 @@ function TransactionsTable() {
         <p>Category</p>
         <p>Date</p>
       </TableHeader>
-      {transactions.map((transaction) => (
+      {transactions?.map((transaction) => (
         <TableRow key={transaction.id}>
           <p>{transaction.title}</p>
           <p className={transaction.type}>${transaction.amount.toFixed(2)}</p>
           <p>{transaction.category}</p>
-          <p>{transaction.date.toString()}</p>
+          <p>{format(new Date(transaction.date), "do 'of' MMMM, yyyy")}</p>
         </TableRow>
       ))}
     </Container>
