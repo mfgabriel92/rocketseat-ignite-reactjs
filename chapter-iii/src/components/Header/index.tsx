@@ -1,7 +1,7 @@
 import { SignInButton } from '@components/SignInButton'
 import styles from './styles.module.scss'
 
-function Header() {
+export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.content}>
@@ -15,5 +15,3 @@ function Header() {
     </header>
   )
 }
-
-export { Header }
