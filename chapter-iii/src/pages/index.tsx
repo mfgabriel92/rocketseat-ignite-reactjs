@@ -1,8 +1,8 @@
-import type { GetStaticProps } from 'next'
-import { stripe } from 'services/stripe'
-import Head from 'next/head'
-import styles from '@styles/home.module.scss'
 import SubscribeButton from '@components/SubscribeButton'
+import styles from '@styles/home.module.scss'
+import type { GetStaticProps } from 'next'
+import Head from 'next/head'
+import { stripe } from 'services/stripe'
 
 interface HomeProps {
   product: {
@@ -11,7 +11,7 @@ interface HomeProps {
   }
 }
 
-export default function Home({ product }: HomeProps) {
+function Home({ product }: HomeProps) {
   return (
     <>
       <Head>
@@ -48,3 +48,5 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 60 * 60 * 24
   }
 }
+
+export default Home
