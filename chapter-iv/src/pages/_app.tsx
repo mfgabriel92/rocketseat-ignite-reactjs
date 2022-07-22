@@ -1,7 +1,7 @@
-import { ChakraProvider } from '@chakra-ui/react' 
-import type { AppProps } from 'next/app'
-import { SidebarProvider } from '../contexts/SidebarContext'
-import theme from '../styles/theme'
+import { ChakraProvider } from "@chakra-ui/react";
+import type { AppProps } from "next/app";
+import { SidebarProvider } from "../contexts/SidebarContext";
+import theme from "../styles/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </SidebarProvider>
     </ChakraProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

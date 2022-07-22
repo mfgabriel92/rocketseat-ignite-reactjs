@@ -1,21 +1,21 @@
-import { Stack } from '@chakra-ui/react'
-import { RiDashboardLine, RiUserSearchFill } from 'react-icons/ri'
-import NavLink from './NavLink'
-import NavSection from './NavSection'
+import { Stack } from "@chakra-ui/react";
+import { RiDashboardLine, RiUserSearchFill } from "react-icons/ri";
+import NavLink from "./NavLink";
+import NavSection from "./NavSection";
 
 function SidebarNav() {
   return (
     <Stack spacing="2rem" align="stretch">
       <NavSection title="GENERAL">
         <NavLink href="/dashboard" icon={RiDashboardLine}>
-            Dashboard
+          Dashboard
         </NavLink>
-        <NavLink href="/dashboard/users" icon={RiUserSearchFill}>
-            Users
+        <NavLink href="/users" icon={RiUserSearchFill}>
+          Users
         </NavLink>
       </NavSection>
     </Stack>
-  )
+  );
 }
 
-export default SidebarNav
+export default SidebarNav;
