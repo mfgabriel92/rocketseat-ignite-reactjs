@@ -10,12 +10,15 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { RiArrowLeftLine, RiCheckLine } from "react-icons/ri";
 import { Input } from "../../components/Form/Input";
 import Header from "../../components/Layout/Header";
 import Sidebar from "../../components/Layout/Sidebar";
+import api from "../../services/api";
 import schema from "./create-user.schema";
 
 interface CreateUserProps {
@@ -26,13 +29,28 @@ interface CreateUserProps {
 }
 
 function CreateUser() {
+  const { push } = useRouter();
   const { register, handleSubmit, formState } = useForm<CreateUserProps>({
     resolver: zodResolver(schema),
   });
+  const queryClient = useQueryClient();
+  const createUser = useMutation(
+    async (user: CreateUserProps) => {
+      await api.post("users", {
+        user: {
+          ...user,
+          createdAt: new Date(),
+        },
+      });
+    },
+    {
+      onSuccess: () => queryClient.invalidateQueries(["users"]),
+    },
+  );
 
-  async function handleCreateNewUser(data: CreateUserProps) {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
+  async function handleCreateNewUser(user: CreateUserProps) {
+    await createUser.mutateAsync(user);
+    push("/users");
   }
 
   return (
@@ -85,7 +103,7 @@ function CreateUser() {
                 type="submit"
                 colorScheme="pink"
                 leftIcon={<Icon as={RiCheckLine} />}
-                isLoading={formState.isSubmitting}
+                isLoading={createUser.isLoading}
               >
                 Save
               </Button>

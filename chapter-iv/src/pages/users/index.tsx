@@ -7,6 +7,7 @@ import {
   Heading,
   HStack,
   Icon,
+  IconButton,
   Spinner,
   Table,
   Tbody,
@@ -17,34 +18,21 @@ import {
   Tr,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import Link from "next/link";
-import { RiAddLine, RiDeleteBinLine, RiPencilLine } from "react-icons/ri";
+import { useState } from "react";
+import { RiAddLine, RiDeleteBinLine, RiPencilLine, RiRefreshLine } from "react-icons/ri";
 import Header from "../../components/Layout/Header";
 import Pagination from "../../components/Layout/Pagination";
 import Sidebar from "../../components/Layout/Sidebar";
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  createdAt: Date;
-}
+import useUsers from "../../hooks/useUsers";
 
 function Users() {
   const isWideScreen = useBreakpointValue({ base: false, lg: true });
-  const { data, isLoading, error } = useQuery(
-    ["users"],
-    async () => {
-      const result = await fetch("https://localhost:3000/api/v1/users");
-      const response = await result.json();
-      return response;
-    },
-    {
-      staleTime: 1000 * 60 * 15,
-    },
-  );
+  const [page, setPage] = useState<number>(1);
+  const { data, isLoading, isFetching, refetch, error } = useUsers(page);
+
+  console.log(data);
 
   return (
     <Box>
@@ -54,20 +42,29 @@ function Users() {
         <Box flex="1" borderRadius="8px" padding="1rem">
           <Flex marginBottom="1rem" justifyContent="space-between" alignItems="center">
             <Heading size="lg" fontWeight="normal">
-              Users
+              Users {!isLoading && isFetching && <Spinner size="sm" />}
             </Heading>
-            <Link href="/users/create" passHref>
-              <Button
-                as="a"
+            <Flex gap="0.5rem">
+              <IconButton
+                icon={<Icon as={RiRefreshLine} />}
+                aria-label="Reload"
                 size="sm"
-                fontSize="sm"
                 colorScheme="pink"
-                cursor="pointer"
-                leftIcon={<Icon as={RiAddLine} />}
-              >
-                New
-              </Button>
-            </Link>
+                onClick={() => refetch()}
+              />
+              <Link href="/users/create" passHref>
+                <Button
+                  as="a"
+                  size="sm"
+                  fontSize="sm"
+                  colorScheme="pink"
+                  cursor="pointer"
+                  leftIcon={<Icon as={RiAddLine} />}
+                >
+                  New
+                </Button>
+              </Link>
+            </Flex>
           </Flex>
 
           {isLoading ? (
@@ -96,22 +93,26 @@ function Users() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.users?.map((user: User) => (
+                  {data?.users?.map((user) => (
                     <Tr key={user.id}>
                       <Td paddingX={["0.5rem", "1rem", "1.5rem"]}>
                         <Checkbox colorScheme="pink" />
                       </Td>
                       <Td paddingX={["0.5rem", "1rem", "1.5rem"]}>
                         <Box>
-                          <Text fontWeight="bold" fontSize={["xs", "xs", "sm"]}>
-                            {user.name}
-                          </Text>
-                          <Text fontSize={["xs", "xs", "sm"]} color="gray.300">
-                            {user.email}
-                          </Text>
+                          <Link href={`/users/${user.id}`}>
+                            <a>
+                              <Text fontWeight="bold" fontSize={["xs", "xs", "sm"]}>
+                                {user.name}
+                              </Text>
+                              <Text fontSize={["xs", "xs", "sm"]} color="gray.300">
+                                {user.email}
+                              </Text>
+                            </a>
+                          </Link>
                         </Box>
                       </Td>
-                      {isWideScreen && <Td>{format(new Date(user.createdAt), "LLLL c, yyyy")}</Td>}
+                      {isWideScreen && <Td>{format(new Date(user.created_at), "LLLL c, yyyy")}</Td>}
                       <Td paddingX={["0.5rem", "1rem", "1.5rem"]}>
                         <HStack spacing="0.5rem" justifyContent="flex-end">
                           <Button size="xs" fontSize="xs" colorScheme="pink">
@@ -126,7 +127,11 @@ function Users() {
                   ))}
                 </Tbody>
               </Table>
-              <Pagination />
+              <Pagination
+                totalRecords={data.totalRecords}
+                currentPage={page}
+                onPageChange={setPage}
+              />
             </>
           )}
         </Box>
