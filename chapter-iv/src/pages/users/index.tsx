@@ -32,8 +32,6 @@ function Users() {
   const [page, setPage] = useState<number>(1);
   const { data, isLoading, isFetching, refetch, error } = useUsers(page);
 
-  console.log(data);
-
   return (
     <Box>
       <Header />
@@ -128,8 +126,9 @@ function Users() {
                 </Tbody>
               </Table>
               <Pagination
-                totalRecords={data.totalRecords}
+                totalRecords={data.totalCount}
                 currentPage={page}
+                recordsPerPage={2}
                 onPageChange={setPage}
               />
             </>

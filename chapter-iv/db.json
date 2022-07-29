@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "created_at": "2022-07-19T02:16:54.566Z",
+      "email": "bernhard.labadie@yahoo.com",
+      "name": "Zackary O'Kon",
+      "id": "1"
+    },
+    {
+      "created_at": "2022-07-26T19:32:09.776Z",
+      "email": "nikolas67@gmail.com",
+      "name": "Isabelle Swift",
+      "id": "2"
+    },
+    {
+      "created_at": "2022-07-14T12:03:00.528Z",
+      "email": "pat_herman44@hotmail.com",
+      "name": "Blanca Borer",
+      "id": "3"
+    },
+    {
+      "created_at": "2022-07-15T09:35:11.442Z",
+      "email": "maxwell_veum63@hotmail.com",
+      "name": "Sylvan Johnson",
+      "id": "4"
+    },
+    {
+      "created_at": "2022-07-12T20:48:45.878Z",
+      "email": "addie_langosh@yahoo.com",
+      "name": "Berenice Feeney",
+      "id": "5"
+    },
+    {
+      "created_at": "2022-07-16T08:40:54.592Z",
+      "email": "zoila.hoeger@yahoo.com",
+      "name": "Gussie Berge",
+      "id": "6"
+    },
+    {
+      "created_at": "2022-07-22T10:56:53.855Z",
+      "email": "van.ward0@yahoo.com",
+      "name": "Bettie Gorczany",
+      "id": "7"
+    },
+    {
+      "created_at": "2022-07-20T08:37:00.744Z",
+      "email": "marlon52@hotmail.com",
+      "name": "Alda O'Conner",
+      "id": "8"
+    },
+    {
+      "created_at": "2022-07-23T14:25:19.747Z",
+      "email": "alicia.sporer@gmail.com",
+      "name": "Nova Mitchell",
+      "id": "9"
+    },
+    {
+      "created_at": "2022-07-07T16:10:01.517Z",
+      "email": "rod.legros75@gmail.com",
+      "name": "Grayce Armstrong",
+      "id": "10"
+    }
+  ]
+}

@@ -9,23 +9,19 @@ interface User {
 }
 
 interface GetUsersResponse {
-  totalRecords: number;
+  totalCount: number;
   users: User[];
 }
 
 async function getUsers(page: number): Promise<GetUsersResponse> {
-  const { data, headers } = await api.get("/users", {
+  const { data, headers } = await api.get(`/users?_page=${page}&_limit=2`, {
     params: {
       page,
     },
   });
+  const totalCount = Number(headers["x-total-count"]);
 
-  const totalRecords = Number(headers["x-total-records"]);
-
-  return {
-    users: data.users,
-    totalRecords,
-  };
+  return { users: data, totalCount };
 }
 
 function useUsers(page: number) {

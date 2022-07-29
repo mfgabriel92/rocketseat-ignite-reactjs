@@ -40,21 +40,21 @@ const options: ApexOptions = {
   },
 };
 
-const series1: ApexAxisChartSeries = [
+const series1 = [
   {
     name: "series1",
     data: Array.from({ length: 7 }, () => Math.floor(Math.random() * 7)),
   },
 ];
 
-const series2: ApexAxisChartSeries = [
+const series2 = [
   {
     name: "series2",
     data: Array.from({ length: 7 }, () => Math.floor(Math.random() * 7)),
   },
 ];
 
-const series3: ApexAxisChartSeries = [
+const series3 = [
   {
     name: "series2",
     data: Array.from({ length: 7 }, () => Math.floor(Math.random() * 7)),
@@ -76,15 +76,15 @@ function Dashboard() {
           height="fit-content"
           paddingX="1rem"
         >
-          <Box padding="1rem" backgroundColor="gray.800" borderRadius="8px">
+          <Box padding="1rem" backgroundColor="gray.800" borderRadius="8px" overflow="hidden">
             <Text>Lorem ipsum</Text>
             <Chart type="area" height={160} options={options} series={series1} />
           </Box>
-          <Box padding="1rem" backgroundColor="gray.800" borderRadius="8px">
+          <Box padding="1rem" backgroundColor="gray.800" borderRadius="8px" overflow="hidden">
             <Text>Lorem ipsum</Text>
             <Chart type="area" height={160} options={options} series={series2} />
           </Box>
-          <Box padding="1rem" backgroundColor="gray.800" borderRadius="8px">
+          <Box padding="1rem" backgroundColor="gray.800" borderRadius="8px" overflow="hidden">
             <Text>Lorem ipsum</Text>
             <Chart type="area" height={160} options={options} series={series3} />
           </Box>

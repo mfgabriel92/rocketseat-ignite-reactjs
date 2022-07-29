@@ -9,11 +9,7 @@ interface SidebarContextProps {
 }
 const SidebarContext = createContext({} as SidebarContextProps);
 
-interface SidebarProviderProps {
-  children: ReactNode;
-}
-
-export function SidebarProvider({ children }: SidebarProviderProps) {
+function SidebarProvider({ children }: { children: ReactNode }) {
   const disclosure = useDisclosure();
   const router = useRouter();
 
@@ -22,4 +18,8 @@ export function SidebarProvider({ children }: SidebarProviderProps) {
   return <SidebarContext.Provider value={disclosure}>{children}</SidebarContext.Provider>;
 }
 
-export const useSidebar = () => useContext(SidebarContext);
+function useSidebar() {
+  return useContext(SidebarContext);
+}
+
+export { SidebarProvider, useSidebar };

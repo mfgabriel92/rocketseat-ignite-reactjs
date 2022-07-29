@@ -24,8 +24,6 @@ import schema from "./create-user.schema";
 interface CreateUserProps {
   name: string;
   email: string;
-  password: string;
-  confirmPassword: string;
 }
 
 function CreateUser() {
@@ -37,10 +35,8 @@ function CreateUser() {
   const createUser = useMutation(
     async (user: CreateUserProps) => {
       await api.post("users", {
-        user: {
-          ...user,
-          createdAt: new Date(),
-        },
+        ...user,
+        created_at: new Date(),
       });
     },
     {
@@ -75,20 +71,6 @@ function CreateUser() {
                 type="email"
                 error={formState.errors.email?.message}
                 {...register("email")}
-              />
-            </SimpleGrid>
-            <SimpleGrid minChildWidth="14rem" spacing="0.5rem" width="100%" height="fit-content">
-              <Input
-                label="Password"
-                type="password"
-                error={formState.errors.password?.message}
-                {...register("password")}
-              />
-              <Input
-                label="Confirm password"
-                type="password"
-                error={formState.errors.confirmPassword?.message}
-                {...register("confirmPassword")}
               />
             </SimpleGrid>
           </VStack>

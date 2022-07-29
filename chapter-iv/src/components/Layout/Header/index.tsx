@@ -1,5 +1,6 @@
 import { Flex, HStack, Icon, IconButton, Input, useBreakpointValue } from "@chakra-ui/react";
 import { RiMenuLine, RiNotificationLine, RiSearchLine, RiUserAddLine } from "react-icons/ri";
+import { useAuth } from "../../../contexts/AuthContext";
 import { useSidebar } from "../../../contexts/SidebarContext";
 import Logo from "./Logo";
 import Profile from "./Profile";
@@ -7,6 +8,7 @@ import Profile from "./Profile";
 function Header() {
   const isWideScreen = useBreakpointValue({ base: false, lg: true });
   const { onOpen } = useSidebar();
+  const { user } = useAuth();
 
   return (
     <Flex as="header" height="4rem" alignItems="center" backgroundColor="gray.800">
@@ -72,7 +74,7 @@ function Header() {
             <Icon as={RiUserAddLine} fontSize="1rem" />
           </HStack>
 
-          <Profile showProfileInfo={isWideScreen} />
+          <Profile showProfileInfo={isWideScreen} user={user} />
         </Flex>
       </Flex>
     </Flex>

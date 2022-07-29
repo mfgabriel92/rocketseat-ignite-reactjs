@@ -2,6 +2,7 @@ import { Button, Divider, Flex, Heading, Stack } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Input } from "../components/Form/Input";
+import { useAuth } from "../contexts/AuthContext";
 import schema from "./signin.schema";
 
 interface SignInProps {
@@ -10,13 +11,14 @@ interface SignInProps {
 }
 
 function Home() {
+  const { signIn } = useAuth();
   const { register, handleSubmit, formState } = useForm<SignInProps>({
     resolver: zodResolver(schema),
   });
 
   async function handleSignIn(data: SignInProps) {
     await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
+    signIn(data);
   }
 
   return (
